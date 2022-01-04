@@ -30,7 +30,7 @@ public class WindowHandle {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-        /* ---------------------------- Windows Handling Methods  ------------------------------
+        /* ---------------------------- Windows Handling Methods as a first  ------------------------------
 
         driver.switchTo().frame("frame name or Id");
 
