@@ -49,7 +49,7 @@ public class Locators {
 
             ** link: -----------------------------------
 
-                //a[text()='text value of the element']
+                //a[text()='text value of the element']  first option
                 //a[contains(text(),'text value of the element')] --recommended
                 //tagName[contains(@attributeName,’attributeValue’)]
                 //tagName[.=’text value of the element’] --not recommend
