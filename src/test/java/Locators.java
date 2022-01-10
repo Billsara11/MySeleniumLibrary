@@ -22,8 +22,7 @@ public class Locators {
         6) By.partialLinkText("How to pick")
         7) By.cssSelector("#address1"))
         8) By.xpath("//*[@id='firstname']"))
-        9) Selenium 4 with
-
+        9) Relative Locators --> Selenium 4 new feature --> https://www.selenium.dev/documentation/webdriver/elements/locators/
 
         -- xPath strategies --
 

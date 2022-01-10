@@ -76,7 +76,7 @@ public class DynamicWebTable {
 
         String beforeXpath = "//th[contains(text(),'Company')]/parent::tr/parent::thead/following-sibling::tbody/tr/td/a[contains(text(),'";
         String afterXpath ="')]";
-        String companyName = "HDIL";
+        String companyName = "NCC";
 
 
         while (!existsElement(By.xpath(beforeXpath + companyName + afterXpath), driver)){
@@ -85,6 +85,8 @@ public class DynamicWebTable {
 
 
         }
+
+
 
     }
 
