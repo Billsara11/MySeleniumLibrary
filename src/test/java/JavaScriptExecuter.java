@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import javax.sound.midi.SysexMessage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -28,7 +29,7 @@ public class JavaScriptExecuter {
 
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/text-box"); //enter URL
-                        Thread.sleep(5000);
+        Thread.sleep(5000);
 
         //executeScript -- to execute JavaScript code
 
@@ -71,89 +72,92 @@ public class JavaScriptExecuter {
         WebElement forgotPwdLink = driver.findElement(By.xpath("//div[contains(text(),'Book Store Application')]"));
         scrollIntoView(forgotPwdLink, driver);
 
-
-
-
-
+        String elementposit = getElementPosition(driver,forgotPwdLink);
+        System.out.println(elementposit);
 
 
     }
+
     public static void flash(WebElement element, WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
-        String bgcolor  = element.getCssValue("backgroundColor");
-        for (int i = 0; i <  10; i++) {
-            changeColor("rgb(0,200,0)", element,driver);//1
-            changeColor(bgcolor, element,driver);//2
+        String bgcolor = element.getCssValue("backgroundColor");
+        for (int i = 0; i < 10; i++) {
+            changeColor("rgb(0,200,0)", element, driver);//1
+            changeColor(bgcolor, element, driver);//2
         }
     }
+
     public static void changeColor(String color, WebElement element, WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
-        js.executeScript("arguments[0].style.backgroundColor = '"+color+"'",  element);
+        js.executeScript("arguments[0].style.backgroundColor = '" + color + "'", element);
 
         try {
             Thread.sleep(20);
-        }  catch (InterruptedException e) {
+        } catch (InterruptedException e) {
         }
     }
 
 
-    public static void drawBorder(WebElement element, WebDriver driver){
+    public static void drawBorder(WebElement element, WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("arguments[0].style.border='5px dashed red'", element);
     }
 
-    public static void generateAlert(WebDriver driver, String message){
+    public static void generateAlert(WebDriver driver, String message) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
-        js.executeScript("alert('"+message+"')");
+        js.executeScript("alert('" + message + "')");
 
     }
 
-    public static void clickElementByJS(WebElement element, WebDriver driver){
+    public static void clickElementByJS(WebElement element, WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("arguments[0].click();", element);
 
     }
 
-    public static void refreshBrowserByJS(WebDriver driver){
+    public static void refreshBrowserByJS(WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("history.go(0)");
     }
 
-    public static String getTitleByJS(WebDriver driver){
+    public static String getTitleByJS(WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         String title = js.executeScript("return document.title;").toString();
         return title;
     }
 
-    public static String getPageInnerText(WebDriver driver){
+    public static String getPageInnerText(WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         String pageText = js.executeScript("return document.documentElement.innerText;").toString();
         return pageText;
     }
 
-    public static void scrollPageDown(WebDriver driver){
+    public static void scrollPageDown(WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
     }
 
-    public static void scrollIntoView(WebElement element, WebDriver driver){
+    public static void scrollIntoView(WebElement element, WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
 
-    // olmadi bu method
-    public static ArrayList<String> getElementPosition(WebDriver driver, WebElement element){
-        JavascriptExecutor js = ((JavascriptExecutor) driver);
-       // String rect = element.getBoundingClientRect();
-        //console.log(rect.top, rect.right, rect.bottom, rect.left);
-       //String elepos= (String) js.executeScript(("arguments[0].getBoundingClientRect().top").toString(), element);
-        ArrayList<String> elepos = (ArrayList<String>) js.executeScript("return arguments[0].getBoundingClientRect()" , element);
-        //js.executeScript("var rect = element.getBoundingClientRect();");
-         //js.executeScript("rec.top").toString();
-        return elepos;
+
+
+
+    public static String getElementPosition(WebDriver driver, WebElement element){
+
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        String left = js.executeScript("return arguments[0].offsetLeft;", element).toString();
+        String top = js.executeScript("return arguments[0].offsetTop;", element).toString();
+        String both = "LeftPosition; " + left + " TopPosition:  " + top;
+        return both;
     }
 
 
 
-    }
+
+}
+
+

@@ -59,8 +59,6 @@ public class WindowHandle {
         wait.until(ExpectedConditions.elementToBeClickable(myElement)).click();
 
 
-
-
 //Wait for the new window or tab
 
         wait.until(numberOfWindowsToBe(2));
