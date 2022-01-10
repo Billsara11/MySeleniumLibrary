@@ -64,8 +64,9 @@ public class DynamicWebTable {
 
         //Method-2:
         // Burada tricky olay su, her refresh edildiginde farkli satir bilgileri yukleyen bir table var.
-        // Burada oyle bir locator yapiyoruz ki, tablonun degismeyen bir elemanindan (Company) asagi dogru traverse ediyoruz
-        // ve textini aliyoruz. hangi text e sahip olan bir eleman ararsak sadece locator da bir ayarlama yapiyoruz.
+        // Burada oyle bir locator yapiyoruz ki, tablonun degismeyen bir elemanindan (Company) asagi dogru traverse ediyoruz.
+        // ve textini almaya calisiyoruz. Ancak bizim aradigimiz element sayfada hic olmadigi icin. isDisabled(), isEnabled(), isSelected()
+        // gibi methodlar ise yaramiyor. hangi text e sahip olan bir eleman ararsak sadece locator da bir ayarlama yapiyoruz.
         // sayet elementi bulamazsa NoSuchElementException hatasi firlatacagi ve program sonlanacagi icin de bu elementi
         // try catch bloguna koyup bulabilecegimiz bir method yapiyoruz. Bu method u main clasta bir donguye sokup elementi bulana kadar sayfayi refresh ettiroyoruz.
 
@@ -79,18 +80,14 @@ public class DynamicWebTable {
         String companyName = "NCC";
 
 
-        while (!existsElement(By.xpath(beforeXpath + companyName + afterXpath), driver)){
+        while (!isElementExist(By.xpath(beforeXpath + companyName + afterXpath), driver)){
 
             driver.navigate().refresh();
-
-
         }
-
-
 
     }
 
-    public static boolean existsElement(By locator, WebDriver driver) {
+    public static boolean isElementExist(By locator, WebDriver driver) {
         try {
             driver.findElement(locator).click();
         } catch (NoSuchElementException e) {
